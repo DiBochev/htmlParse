@@ -58,25 +58,37 @@ public class Parser {
 			}
 			if(sb.charAt(counter -1) ==' ' && (sb.charAt(counter) == ' ')){
 				sb.deleteCharAt(counter);
-				continue;
-			}if(sb.charAt(counter) == '&' && sb.charAt(counter + 1) == 'l' && sb.charAt(counter + 2) == 't' && sb.charAt(counter + 3) == ';'){
-				sb.delete(counter, counter + 4);
-				continue;
-			}if(sb.charAt(counter) == '/' && sb.charAt(counter + 1) == '&' && sb.charAt(counter + 2) == 'g' && sb.charAt(counter + 3) == 't' && sb.charAt(counter + 4) == ';'){
-				sb.delete(counter, counter + 5);
-				continue;
-			}if(sb.charAt(counter) == '&' && sb.charAt(counter + 1) == 'a' && sb.charAt(counter + 2) == 'm' && sb.charAt(counter + 3) == 'p' && sb.charAt(counter + 4) == ';'){
-				sb.delete(counter, counter + 5);
-				continue;
-			}if(sb.charAt(counter) == '&' && sb.charAt(counter + 1) == 'g' && sb.charAt(counter + 2) == 't' && sb.charAt(counter + 3) == ';'){
-				sb.delete(counter, counter + 4);
-				continue;
-			}if(sb.charAt(counter) == '&' && sb.charAt(counter + 1) == 'n' && sb.charAt(counter + 2) == 'b' && sb.charAt(counter + 3) == 's'&& sb.charAt(counter + 4) == 'p'&& sb.charAt(counter + 5) == ';'){
-				sb.delete(counter, counter + 6);
-				continue;
 			}
+			removeSymbols(counter, "&lt");
+			removeSymbols(counter, "/&gt;");
+			removeSymbols(counter, "&mp;");
+			removeSymbols(counter, "&nbsp;");
 			counter++;
 		}
+	}
+	
+	private void removeSymbols(int counter, String symbol) {
+		char[] array = symbol.toCharArray();
+		boolean result = true;
+		for (int i = 0; i < array.length; i++) {
+			if(counter + array.length > sb.length()){
+				result = false;
+				break;
+			}
+			if(!(sb.charAt(counter + i) == array[i])){
+				result = false;
+			}
+		}
+		if(result){
+			sb.delete(counter, counter + array.length);
+		}
+		
+		
+		
+		
+//		if(sb.charAt(counter) == '&' && sb.charAt(counter + 1) == 'n' && sb.charAt(counter + 2) == 'b' && sb.charAt(counter + 3) == 's'&& sb.charAt(counter + 4) == 'p'&& sb.charAt(counter + 5) == ';'){
+//			sb.delete(counter, counter + 6);
+//		}
 	}
 	 
 	 public static boolean isEmpty(String str) {
