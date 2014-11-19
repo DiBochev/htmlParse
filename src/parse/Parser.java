@@ -2,14 +2,7 @@ package parse;
 
 public class Parser {
 
-	private final String OpenTag = "<";
-	private final String CloseTag = ">";
-	private final String JAVASCRIPT_OPEN_TAG = "<script";
-	private final String JAVASCRIPT_CLOSE_TAG = "</script>";
-	private final String CSS_OPEN_TAG = "<style";
-	private final String CSS_CLOSE_TAG = "</style>";
-	private final String TEXTARIA_OPEN_TAG = "<textarea";
-	private final String TEXTARIA_CLOSE_TAG = "</textarea>";
+	private final String[] HTML_SPECIAL_TAGS = {"<script"+ "</script>" + "<style"+ "</style>" + "<textarea" + "</textarea>" + "<" + ">"};
 	private final String[] HTML_SYMBOLS = {"&lt", "/&gt;", "&mp;", "&nbsp;", "  ", "&amp;", "&gt;"};
 			
 	private StringBuilder sb;
@@ -36,10 +29,9 @@ public class Parser {
 	}
 	
 	public void removeTags(){
-		removeBigTabs(this.JAVASCRIPT_OPEN_TAG, this.JAVASCRIPT_CLOSE_TAG);
-		removeBigTabs(this.CSS_OPEN_TAG, this.CSS_CLOSE_TAG);
-		removeBigTabs(this.OpenTag, this.CloseTag);
-		removeBigTabs(this.TEXTARIA_OPEN_TAG, this.TEXTARIA_CLOSE_TAG);
+		for (int i = 0; i < HTML_SPECIAL_TAGS.length - 1; i+=2) {
+			removeBigTabs(this.HTML_SPECIAL_TAGS[i], this.HTML_SPECIAL_TAGS[i + 1]);
+		}
 		removeNewLines();
 		this.html = sb.toString();
 	}
