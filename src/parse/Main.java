@@ -12,7 +12,7 @@ public class Main {
 	    StringBuilder html = new StringBuilder();
 	    BufferedReader reader = null;
 		try {
-			reader = new BufferedReader(new FileReader("E:\\СУ\\2 година\\2 семестър\\www web\\site\\1.html"));
+			reader = new BufferedReader(new FileReader("E:\\СУ\\2 година\\2 семестър\\www web\\site\\61550.html"));
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
@@ -25,10 +25,10 @@ public class Main {
 			e.printStackTrace();
 		}
 	    Parser p = new Parser(html.toString());
-//	    p.removeJavaScript();
-	    p.removeTags();
-//	    p.removeTags();
-	    System.out.println(p.html);
+	    if (!p.isEmpty()) {
+	    	p.removeTags();
+		}
+	    System.out.println(p.toString());
 	}
 
 }

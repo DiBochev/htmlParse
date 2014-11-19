@@ -10,9 +10,10 @@ public class Parser {
 	private final String CSS_CLOSE_TAG = "</style>";
 	private final String TEXTARIA_OPEN_TAG = "<textarea";
 	private final String TEXTARIA_CLOSE_TAG = "</textarea>";
-	
+	private final String[] HTML_SYMBOLS = {"&lt", "/&gt;", "&mp;", "&nbsp;", "  ", "&amp;", "&gt;"};
+			
 	private StringBuilder sb;
-	public String html;
+	private String html;
 	
 	
 	public Parser(String html) {
@@ -56,13 +57,9 @@ public class Parser {
 				sb.deleteCharAt(counter);
 				continue;
 			}
-			if(sb.charAt(counter -1) ==' ' && (sb.charAt(counter) == ' ')){
-				sb.deleteCharAt(counter);
+			for (int i = 0; i < this.HTML_SYMBOLS.length; i++) {
+				removeSymbols(counter, this.HTML_SYMBOLS[i]);
 			}
-			removeSymbols(counter, "&lt");
-			removeSymbols(counter, "/&gt;");
-			removeSymbols(counter, "&mp;");
-			removeSymbols(counter, "&nbsp;");
 			counter++;
 		}
 	}
@@ -82,16 +79,20 @@ public class Parser {
 		if(result){
 			sb.delete(counter, counter + array.length);
 		}
-		
-		
-		
-		
-//		if(sb.charAt(counter) == '&' && sb.charAt(counter + 1) == 'n' && sb.charAt(counter + 2) == 'b' && sb.charAt(counter + 3) == 's'&& sb.charAt(counter + 4) == 'p'&& sb.charAt(counter + 5) == ';'){
-//			sb.delete(counter, counter + 6);
-//		}
 	}
 	 
-	 public static boolean isEmpty(String str) {
-	      return str == null || str.length() == 0;
+	public boolean isEmpty() {
+		 if (this.html.isEmpty()) {
+			return true;
+		}else{
+			return false;
+		}
 	  }
+
+	@Override
+	public String toString() {
+		return "HTML content is:\n" + this.sb.toString();
+	}
+	 
+	 
 }
