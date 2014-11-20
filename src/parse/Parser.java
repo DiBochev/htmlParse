@@ -2,7 +2,7 @@ package parse;
 
 public class Parser {
 
-	private final String[] HTML_SPECIAL_TAGS = {"<script"+ "</script>" + "<style"+ "</style>" + "<textarea" + "</textarea>" + "<" + ">"};
+	private final String[] HTML_SPECIAL_TAGS = {"<script", "</script>", "<style", "</style>", "<textarea", "</textarea>", "<", ">"};
 	private final String[] HTML_SYMBOLS = {"&lt", "/&gt;", "&mp;", "&nbsp;", "  ", "&amp;", "&gt;"};
 			
 	private StringBuilder sb;
