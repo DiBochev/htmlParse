@@ -12,15 +12,14 @@ public class Main {
 	    StringBuilder html = new StringBuilder();
 	    BufferedReader reader = null;
 		try {
-			reader = new BufferedReader(new FileReader("E:\\СУ\\2 година\\2 семестър\\www web\\site\\61550.html"));
+			reader = new BufferedReader(new FileReader("E:\\СУ\\2 година\\2 семестър\\www web\\site\\1yyy7.html"));
 			String line = null;
 			while ((line = reader.readLine()) != null) {
 				html.append(line + "\n");
 			}
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.err.println("file error \n" + e.getMessage());
+			return;
 		}
 	    Parser p = new Parser(html.toString());
 	    if (!p.isEmpty()) {

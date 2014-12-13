@@ -14,7 +14,7 @@ public class Parser {
 		this.sb = new StringBuilder(html);
 	}
 
-	private void removeBigTabs(String beginTab, String endTab){
+	private void removeBigTags(String beginTab, String endTab){
 		int begin = this.sb.indexOf(beginTab);;
 		int end = this.sb.indexOf(endTab);
 		while (begin != -1){
@@ -30,7 +30,7 @@ public class Parser {
 	
 	public void removeTags(){
 		for (int i = 0; i < HTML_SPECIAL_TAGS.length - 1; i+=2) {
-			removeBigTabs(this.HTML_SPECIAL_TAGS[i], this.HTML_SPECIAL_TAGS[i + 1]);
+			removeBigTags(this.HTML_SPECIAL_TAGS[i], this.HTML_SPECIAL_TAGS[i + 1]);
 		}
 		removeNewLines();
 		this.html = sb.toString();
